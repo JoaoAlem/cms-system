@@ -1,17 +1,16 @@
-import { NodePgDatabase } from "drizzle-orm/node-postgres"
 import { permissions, rolePermissions, roles } from "./db/schema"
 import { db } from "./index"
 
 async function main() {
     const permissionsAndRoles = await Promise.all([
-        seedInitialPermissions(db),
-        seedInitialRoles(db)
+        seedInitialPermissions(),
+        seedInitialRoles()
     ])
 
-    await seedRolesPermissions(db, permissionsAndRoles)
+    await seedRolesPermissions(permissionsAndRoles)
 }
 
-async function seedInitialPermissions(db: NodePgDatabase) {
+async function seedInitialPermissions() {
     return await db.insert(permissions).values([
         { name: "view_users" },
         { name: "create_users" },
@@ -30,7 +29,7 @@ async function seedInitialPermissions(db: NodePgDatabase) {
     }).returning({ permissionId: permissions.id })
 }
 
-async function seedInitialRoles(db: NodePgDatabase) {
+async function seedInitialRoles() {
     return await db.insert(roles).values([
         { name: "admin" },
     ]).onConflictDoNothing({
@@ -44,7 +43,7 @@ type permissionsAndRoles = [{
     roleId: number;
 }[]]
 
-async function seedRolesPermissions(db: NodePgDatabase, permissionsAndRoles: permissionsAndRoles) {
+async function seedRolesPermissions(permissionsAndRoles: permissionsAndRoles) {
     const permissions = permissionsAndRoles[0]
     const roles = permissionsAndRoles[1]
 

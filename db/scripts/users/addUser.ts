@@ -36,10 +36,10 @@ async function main() {
         allowPositionals: true,
     });
 
-    if (!values?.user || !values.email || !values.password) {
-        throw new Error("Todos os argumentos são obrigatórios. Uso da função: bun --bun run scripts/users/addUser.ts --user {{user}} --email {{email}} --password {{password}}")
-    }
     try {
+        if (!values?.user || !values.email || !values.password) {
+            throw new Error("Todos os argumentos são obrigatórios. Uso da função: bun --bun run scripts/users/addUser.ts --user {{user}} --email {{email}} --password {{password}}")
+        }
         await createNewUser(values.user, values.email, values.password)
     } catch (e) {
         console.error(e?.toString())

@@ -3,7 +3,8 @@
     "db:generate": "bun --bun run drizzle-kit generate",
     "db:migrate": "bun --bun run drizzle-kit migrate",
     "db:seed": "bun --bun run src/seed.ts",
-    "db:createUser": "bun --bun run scripts/users/addUser.ts"
+    "db:createUser": "bun --bun run scripts/users/addUser.ts",
+    "db:addUserToRole": "bun --bun run scripts/users/assignUserRole.ts"
   },
   "dependencies": {
     "argon2": "^0.44.0",
