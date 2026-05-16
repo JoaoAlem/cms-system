@@ -1,4 +1,4 @@
-# Sistema financeiro
+# CMS
 
 Esse é um projeto para aprendizado de analise de dados e Javascript. Esse projeto existe somente para fins de estudos.
 
