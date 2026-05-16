@@ -2,9 +2,11 @@
   "scripts": {
     "db:generate": "bun --bun run drizzle-kit generate",
     "db:migrate": "bun --bun run drizzle-kit migrate",
-    "db:seed": "bun --bun run src/seed.ts"
+    "db:seed": "bun --bun run src/seed.ts",
+    "db:createUser": "bun --bun run scripts/users/addUser.ts"
   },
   "dependencies": {
+    "argon2": "^0.44.0",
     "dotenv": "^17.4.2",
     "drizzle-orm": "^0.45.2",
     "pg": "^8.20.0"

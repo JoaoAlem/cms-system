@@ -1,15 +1,14 @@
-import { drizzle, NodePgDatabase } from "drizzle-orm/node-postgres";
-import { seed } from "drizzle-seed";
-import * as schema from './db/schema'
-
+import { NodePgDatabase } from "drizzle-orm/node-postgres"
+import { seed } from "drizzle-seed"
+import * as schema from "./db/schema"
+import { db } from "./index"
 
 async function main() {
-  const db = drizzle(process.env.DATABASE_URL!);
-  await seedUser(db)
+    await seedUser(db)
 }
 
-async function seedUser(db: NodePgDatabase)
-{
+async function seedUser(db: NodePgDatabase) {
+
     await seed(db, { users: schema.users }).refine((f) => ({
         users: {
             columns: {
@@ -19,7 +18,7 @@ async function seedUser(db: NodePgDatabase)
                     isUnique: false
                 }),
                 createdAt: f.default({ defaultValue: new Date() }),
-                updatedAt: f.default({ defaultValue: new Date()}),
+                updatedAt: f.default({ defaultValue: new Date() }),
                 deletedAt: f.default({ defaultValue: null }),
             },
             count: 20
