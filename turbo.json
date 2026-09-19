@@ -2,8 +2,9 @@
   "$schema": "https://turborepo.dev/schema.json",
   "tasks": {
     "db:generate":{ 
-      "persistent": false,
+      "persistent": true,
       "cache": false
+    
     },
     "db:migrate":{ 
       "persistent": false,

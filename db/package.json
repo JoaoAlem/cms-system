@@ -1,6 +1,7 @@
 {
   "name": "cms-system-db",
   "private": true,
+  "main": "src/index.ts",
   "scripts": {
     "db:generate": "pnpm exec drizzle-kit generate",
     "db:migrate": "pnpm exec drizzle-kit migrate",
