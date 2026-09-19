@@ -1,5 +1,6 @@
 packages:
   - "db"
+  - "api"
 allowBuilds:
   argon2: true
   esbuild: true
