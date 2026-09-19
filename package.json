@@ -5,7 +5,8 @@
   "scripts": {
     "db:generate": "turbo db:generate",
     "db:migrate": "turbo db:migrate",
-    "db:seed": "turbo db:seed"
+    "db:seed": "turbo db:seed",
+    "dev": "turbo dev"
   },
   "keywords": [],
   "author": "João Alem",
