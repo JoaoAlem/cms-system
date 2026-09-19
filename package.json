@@ -1,0 +1,25 @@
+{
+  "name": "cms-system",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "db:generate": "turbo db:generate",
+    "db:migrate": "turbo db:migrate",
+    "db:seed": "turbo db:seed"
+  },
+  "keywords": [],
+  "author": "João Alem",
+  "license": "UNLICENSED",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.4.2",
+      "onFail": "download"
+    }
+  },
+  "packageManager": "pnpm@12.4.2",
+  "type": "module",
+  "devDependencies": {
+    "turbo": "^2.11.0"
+  }
+}
