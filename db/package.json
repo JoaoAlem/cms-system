@@ -1,12 +1,13 @@
 {
   "name": "cms-system-db",
   "private": true,
+  "main": "src/index.ts",
   "scripts": {
-    "db:generate": "pnpx drizzle-kit generate",
-    "db:migrate": "pnpx drizzle-kit migrate",
-    "db:seed": "pnpx src/seed.ts",
-    "db:createUser": "pnpx scripts/users/addUser.ts",
-    "db:addUserToRole": "pnpx scripts/users/assignUserRole.ts"
+    "db:generate": "pnpm exec drizzle-kit generate",
+    "db:migrate": "pnpm exec drizzle-kit migrate",
+    "db:seed": "pnpm exec tsx src/seed.ts",
+    "db:createUser": "pnpm exec tsx scripts/users/addUser.ts",
+    "db:addUserToRole": "pnpm exec tsx scripts/users/assignUserRole.ts"
   },
   "dependencies": {
     "argon2": "^0.45.1",
