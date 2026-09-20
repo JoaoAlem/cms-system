@@ -1,4 +1,6 @@
-import 'dotenv/config';
+import { config } from 'dotenv';
+config({ path: new URL('../.env', import.meta.url) });
+
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { relations } from './db/relations.js';
 

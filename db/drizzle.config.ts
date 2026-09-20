@@ -1,4 +1,6 @@
-import 'dotenv/config';
+import { config } from 'dotenv';
+config({ path: new URL('./.env', import.meta.url) });
+
 import { defineConfig } from 'drizzle-kit';
 
 export default defineConfig({

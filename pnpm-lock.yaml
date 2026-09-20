@@ -187,6 +187,9 @@ importers:
       db:
         specifier: workspace:*
         version: link:../db
+      dotenv:
+        specifier: ^18.0.0
+        version: 18.0.1
       drizzle-zod:
         specifier: ^0.8.3
         version: 0.8.3(drizzle-orm@1.0.0-rc.5-ab785fc(@types/pg@8.23.1)(pg@8.23.0)(zod@4.6.5))(zod@4.6.5)

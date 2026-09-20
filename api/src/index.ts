@@ -1,16 +1,22 @@
+import { config } from "dotenv";
+config({ path: new URL("../.env", import.meta.url) });
+
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
-import { auth } from "./routes/auth.js";
+import type { AppEnv } from "./types/env.js"
+import routes from './routes/index.js';
 
-const app = new Hono().basePath('v1')
-
-app.all("/auth/*", (c) => {
-  return auth.handler(c.req.raw);
-});
+const app = new Hono<AppEnv>({
+  strict: false,
+}).basePath("/v1");
 
 app.get('/', (c) => {
   return c.text('Hello Hono!')
 })
+
+routes.forEach((route) => {
+  app.route("/", route);
+});
 
 const server = serve({
   fetch: app.fetch,
@@ -33,4 +39,3 @@ process.on('SIGTERM', () => {
     process.exit(0)
   })
 })
-
