@@ -1,8 +1,8 @@
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
-import { auth } from "./lib/auth.js";
+import { auth } from "./routes/auth.js";
 
-const app = new Hono()
+const app = new Hono().basePath('v1')
 
 app.all("/api/auth/*", (c) => {
   return auth.handler(c.req.raw);
