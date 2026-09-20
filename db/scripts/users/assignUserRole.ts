@@ -3,15 +3,15 @@ import { userRoles } from "../../src/db/schema"
 import { parseArgs } from "util";
 
 async function assignUserToRole(usernameOrEmail: string, role: string) {
-    const userEntity = await db.query.users.findFirst({
+    const userEntity = await db.query.user.findFirst({
         columns: { id: true },
-        where: (users, { or, eq, and, isNull }) =>
+        where: (user, { or, eq, and, isNull }) =>
             and(
                 or(
-                    eq(users.name, usernameOrEmail),
-                    eq(users.email, usernameOrEmail)
+                    eq(user.name, usernameOrEmail),
+                    eq(user.email, usernameOrEmail)
                 ),
-                isNull(users.deletedAt)
+                isNull(user.deletedAt)
             )
     })
 

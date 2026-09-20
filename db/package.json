@@ -15,13 +15,13 @@
     "db:addUserToRole": "pnpm exec tsx scripts/users/assignUserRole.ts"
   },
   "dependencies": {
-    "argon2": "^0.45.1",
     "dotenv": "^18.0.0",
     "drizzle-orm": "^1.0.0-rc.5-ab785fc",
     "pg": "^8.23.0"
   },
   "devDependencies": {
     "@types/pg": "^8.23.1",
+    "argon2": "^0.45.1",
     "drizzle-kit": "^1.0.0-rc.5-ab785fc",
     "drizzle-seed": "^1.0.0-rc.5-ab785fc",
     "tsx": "^4.23.13"
