@@ -1,6 +1,6 @@
 import argon2 from "argon2"
-import { db } from "../../src/index"
-import { account, user } from "../../src/db/schema"
+import { db } from "../../src/index.js"
+import { account, user } from "../../src/db/schema.js"
 import { parseArgs } from "util";
 import { randomUUID } from "crypto";
 

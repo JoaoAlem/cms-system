@@ -211,7 +211,7 @@ importers:
         version: 18.0.1
       drizzle-orm:
         specifier: ^1.0.0-rc.5-ab785fc
-        version: 1.0.0-rc.5-ab785fc(@types/pg@8.23.1)(pg@8.23.0)
+        version: 1.0.0-rc.5-ab785fc(@types/pg@8.23.1)(pg@8.23.0)(zod@4.6.5)
       pg:
         specifier: ^8.23.0
         version: 8.23.0
@@ -227,7 +227,7 @@ importers:
         version: 1.0.0-rc.5-ab785fc
       drizzle-seed:
         specifier: ^1.0.0-rc.5-ab785fc
-        version: 1.0.0-rc.5-ab785fc(drizzle-orm@1.0.0-rc.5-ab785fc(@types/pg@8.23.1)(pg@8.23.0))
+        version: 1.0.0-rc.5-ab785fc(drizzle-orm@1.0.0-rc.5-ab785fc(@types/pg@8.23.1)(pg@8.23.0)(zod@4.6.5))
       tsx:
         specifier: ^4.23.13
         version: 4.23.13
@@ -1616,20 +1616,15 @@ snapshots:
       get-tsconfig: 4.14.3
       jiti: 2.7.0
 
-  drizzle-orm@1.0.0-rc.5-ab785fc(@types/pg@8.23.1)(pg@8.23.0):
-    optionalDependencies:
-      '@types/pg': 8.23.1
-      pg: 8.23.0
-
   drizzle-orm@1.0.0-rc.5-ab785fc(@types/pg@8.23.1)(pg@8.23.0)(zod@4.6.5):
     optionalDependencies:
       '@types/pg': 8.23.1
       pg: 8.23.0
       zod: 4.6.5
 
-  drizzle-seed@1.0.0-rc.5-ab785fc(drizzle-orm@1.0.0-rc.5-ab785fc(@types/pg@8.23.1)(pg@8.23.0)):
+  drizzle-seed@1.0.0-rc.5-ab785fc(drizzle-orm@1.0.0-rc.5-ab785fc(@types/pg@8.23.1)(pg@8.23.0)(zod@4.6.5)):
     dependencies:
-      drizzle-orm: 1.0.0-rc.5-ab785fc(@types/pg@8.23.1)(pg@8.23.0)
+      drizzle-orm: 1.0.0-rc.5-ab785fc(@types/pg@8.23.1)(pg@8.23.0)(zod@4.6.5)
       pure-rand: 6.1.0
 
   drizzle-zod@0.8.3(drizzle-orm@1.0.0-rc.5-ab785fc(@types/pg@8.23.1)(pg@8.23.0)(zod@4.6.5))(zod@4.6.5):

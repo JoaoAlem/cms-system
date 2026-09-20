@@ -1,4 +1,4 @@
-import { boolean, integer, index, pgTable, primaryKey, text, timestamp, varchar } from "drizzle-orm/pg-core";
+import { boolean, integer, index, pgTable, primaryKey, text, timestamp, varchar, uniqueIndex } from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -49,14 +49,18 @@ export const verification = pgTable("verification", {
 
 export const permissions = pgTable("permissions", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  title: varchar({length: 255}).notNull(),
   name: varchar({ length: 255 }).notNull().unique(),
   createdAt: timestamp({ mode: "date" }).defaultNow(),
   updatedAt: timestamp({ mode: "date" }).defaultNow().$onUpdateFn(() => new Date()),
   deletedAt: timestamp({ mode: "date" }),
-}, table => [index("permissions_deleted_idx").on(table.deletedAt)]);
+}, table => [
+  index("permissions_deleted_idx").on(table.deletedAt),
+]);
 
 export const roles = pgTable("roles", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  title: varchar({length: 255}).notNull(),
   name: varchar({ length: 255 }).notNull().unique(),
   createdAt: timestamp({ mode: "date" }).defaultNow(),
   updatedAt: timestamp({ mode: "date" }).defaultNow().$onUpdateFn(() => new Date()),
