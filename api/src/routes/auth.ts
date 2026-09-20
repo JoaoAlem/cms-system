@@ -1,9 +1,11 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "@better-auth/drizzle-adapter/relations-v2";
+import { openAPI } from "better-auth/plugins";
 import { db } from "db";
 import argon2 from "argon2"
 
 export const auth = betterAuth({
+  basePath: "/v1/auth",
   database: drizzleAdapter(db, {
     provider: "pg",
   }),
@@ -21,6 +23,7 @@ export const auth = betterAuth({
 			}
 		}
   },
+  plugins: [openAPI()],
 });
 
 export type AuthType = {

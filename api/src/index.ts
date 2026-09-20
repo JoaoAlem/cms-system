@@ -4,7 +4,7 @@ import { auth } from "./routes/auth.js";
 
 const app = new Hono().basePath('v1')
 
-app.all("/api/auth/*", (c) => {
+app.all("/auth/*", (c) => {
   return auth.handler(c.req.raw);
 });
 
