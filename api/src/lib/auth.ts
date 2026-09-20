@@ -5,7 +5,7 @@ import argon2 from "argon2"
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
-    provider: "pg", // or "pg" or "mysql"
+    provider: "pg",
   }),
   emailAndPassword: {
     enabled: true,
