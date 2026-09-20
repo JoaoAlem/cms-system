@@ -15,16 +15,25 @@
     },
     "db:migrate": {
       "persistent": false,
-      "cache": false,
+      "cache": true,
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "src/db/**"
+      ],
       "dependsOn": ["db:generate"]
     },
     "db:seed": {
       "persistent": false,
-      "cache": false,
+      "cache": true,
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "src/seed.ts",
+        "src/db/**"
+      ],
       "dependsOn": ["db:migrate"]
     },
     "dev": {
-      "dependsOn": ["db:migrate"],
+      "dependsOn": ["db:seed"],
       "persistent": true,
       "cache": false
     }
