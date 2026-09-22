@@ -1,18 +1,35 @@
 import { defineRelations } from "drizzle-orm";
-import * as schema from "./schema";
+import * as schema from "./schema.js";
 
 export const relations = defineRelations(schema, (r) => ({
-  users: {
+  user: {
+    sessions: r.many.session(),
+    accounts: r.many.account(),
+
     roles: r.many.roles({
-      from: r.users.id.through(r.userRoles.userId),
+      from: r.user.id.through(r.userRoles.userId),
       to: r.roles.id.through(r.userRoles.roleId),
     }),
   },
 
+  session: {
+    user: r.one.user({
+      from: r.session.userId,
+      to: r.user.id,
+    }),
+  },
+
+  account: {
+    user: r.one.user({
+      from: r.account.userId,
+      to: r.user.id,
+    }),
+  },
+
   roles: {
-    users: r.many.users({
+    users: r.many.user({
       from: r.roles.id.through(r.userRoles.roleId),
-      to: r.users.id.through(r.userRoles.userId),
+      to: r.user.id.through(r.userRoles.userId),
     }),
 
     permissions: r.many.permissions({

@@ -1,19 +1,39 @@
 {
   "$schema": "https://turborepo.dev/schema.json",
   "tasks": {
-    "db:generate":{ 
+    "db:generate": {
       "persistent": false,
-      "cache": false
+      "cache": true,
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "src/db/**",
+        "drizzle.config.ts"
+      ],
+      "outputs": [
+        "drizzle/**"
+      ]
     },
-    "db:migrate":{ 
+    "db:migrate": {
       "persistent": false,
-      "cache": false
+      "cache": true,
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "src/db/**"
+      ],
+      "dependsOn": ["db:generate"]
     },
-    "db:seed":{ 
+    "db:seed": {
       "persistent": false,
-      "cache": false
+      "cache": true,
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "src/seed.ts",
+        "src/db/**"
+      ],
+      "dependsOn": ["db:migrate"]
     },
     "dev": {
+      "dependsOn": ["db:seed"],
       "persistent": true,
       "cache": false
     }

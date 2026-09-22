@@ -5,7 +5,8 @@
   "scripts": {
     "db:generate": "turbo db:generate",
     "db:migrate": "turbo db:migrate",
-    "db:seed": "turbo db:seed"
+    "db:seed": "turbo db:seed",
+    "dev": "turbo dev"
   },
   "keywords": [],
   "author": "João Alem",
@@ -20,6 +21,6 @@
   "packageManager": "pnpm@12.4.2",
   "type": "module",
   "devDependencies": {
-    "turbo": "^2.11.0"
+    "turbo": "^2.11.2"
   }
 }

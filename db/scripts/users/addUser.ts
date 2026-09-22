@@ -1,16 +1,25 @@
 import argon2 from "argon2"
-import { db } from "../../src/index"
-import { users } from "../../src/db/schema"
+import { db } from "../../src/index.js"
+import { account, user } from "../../src/db/schema.js"
 import { parseArgs } from "util";
+import { randomUUID } from "crypto";
 
 async function createNewUser(name: string, email: string, plainPassword: string) {
     const hashedPassword = await argon2.hash(plainPassword);
 
-    await db.execute(`select setval('users_id_seq', (select max(id) from users));`)
+    const userId = randomUUID();
 
-    await db.insert(users).values({
+    await db.insert(user).values({
+        id: userId,
         name,
         email,
+    });
+
+    await db.insert(account).values({
+        id: randomUUID(),
+        accountId: userId,
+        providerId: "credential",
+        userId,
         password: hashedPassword,
     });
 }
