@@ -1,8 +1,9 @@
-import { createMiddleware } from "hono/factory";
-import { auth } from "../lib/auth.js";
-import type { AppEnv } from "../types/env.js";
-import { HTTPException } from "hono/http-exception";
+import { createMiddleware } from 'hono/factory';
+import { HTTPException } from 'hono/http-exception';
 
+import { auth } from '../lib/auth.js';
+
+import type { AppEnv } from "../types/env.js";
 export const sessionMiddleware = createMiddleware<AppEnv>(
   async (context, next) => {
     const session = await auth.api.getSession({

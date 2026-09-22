@@ -1,7 +1,7 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "@better-auth/drizzle-adapter/relations-v2";
 import { openAPI } from "better-auth/plugins";
-import { db } from "db";
+import db from "db";
 import argon2 from "argon2"
 
 export const auth = betterAuth({

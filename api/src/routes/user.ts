@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { sessionMiddleware } from "../middleware/session-middleware.js";
 import type { AppEnv } from "../types/env.js";
-import { db } from "db";
+import db from "db";
 import { HTTPException } from "hono/http-exception";
 
 const user = new Hono<AppEnv>({
