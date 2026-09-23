@@ -1,4 +1,4 @@
-import { boolean, integer, index, pgTable, primaryKey, text, timestamp, varchar, uniqueIndex } from "drizzle-orm/pg-core";
+import { boolean, integer, index, pgTable, primaryKey, text, timestamp, varchar } from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
