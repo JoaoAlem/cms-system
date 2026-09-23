@@ -4,11 +4,11 @@ import type { AppEnv } from "../types/env.js";
 import db from "db";
 import { HTTPException } from "hono/http-exception";
 
-const user = new Hono<AppEnv>({
+const me = new Hono<AppEnv>({
   strict: false,
 }).basePath("user")
 
-user.get("/permissions", sessionMiddleware, async (context) => {
+me.get("/permissions", sessionMiddleware, async (context) => {
   const authSession = context.get("session")!;
 
   const userWithRoles = await db.query.user.findFirst({
@@ -47,4 +47,4 @@ user.get("/permissions", sessionMiddleware, async (context) => {
   return context.json(permissions);
 })
 
-export default user
+export default me
