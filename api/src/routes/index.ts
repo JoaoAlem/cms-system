@@ -1,11 +1,7 @@
-import auth from "./auth.js"
-import user from "./user.js"
-import roles from "./roles.js"
-import permissions from "./permissions.js"
+import auth from "./auth.js";
+import me from "./me.js";
+import roles from "./roles.js";
+import permissions from "./permissions.js";
+import users from "./users.js";
 
-export default [
-    auth,
-    user,
-    roles,
-    permissions
-]
+export default [auth, me, roles, permissions, users];
