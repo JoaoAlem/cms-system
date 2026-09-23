@@ -30,4 +30,9 @@ roles.get(
   },
 );
 
+roles.post('/', sessionMiddleware, requirePermission('create_roles'))
+roles.patch('/:id', sessionMiddleware, requirePermission('edit_roles'))
+roles.put('/:id', sessionMiddleware, requirePermission('edit_roles'))
+roles.delete('/:id', sessionMiddleware, requirePermission('delete_roles'))
+
 export default roles;
