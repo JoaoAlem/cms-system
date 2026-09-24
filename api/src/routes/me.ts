@@ -6,7 +6,7 @@ import { HTTPException } from "hono/http-exception";
 
 const me = new Hono<AppEnv>({
   strict: false,
-}).basePath("user")
+}).basePath("user");
 
 me.get("/permissions", sessionMiddleware, async (context) => {
   const authSession = context.get("session")!;
@@ -39,12 +39,12 @@ me.get("/permissions", sessionMiddleware, async (context) => {
 
   if (!userWithRoles) {
     throw new HTTPException(404, {
-      message: "Usuário não encontrado",
+      message: "User not found",
     });
   }
 
   const permissions = userWithRoles.roles.flatMap((role) => role.permissions);
   return context.json(permissions);
-})
+});
 
-export default me
+export default me;
