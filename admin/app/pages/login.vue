@@ -6,7 +6,7 @@ declare module 'nuxt/app' {
 }
 
 definePageMeta({
-  layout: 'login',
+  layout: false,
 })
 </script>
 
