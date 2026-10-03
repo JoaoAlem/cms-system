@@ -1,12 +1,12 @@
 import { Hono } from "hono";
-import { validator } from "hono/validator";
+import { zValidator } from "@hono/zod-validator";
 import { sessionMiddleware } from "../middleware/session-middleware.js";
 import { requirePermission } from "../middleware/permission-middleware.js";
 
 import type { AppEnv } from "../types/env.js";
 import db, { and, createInsertSchema, DrizzleQueryError, eq, isNull } from "db";
 import { roles as rolesTable } from "db/schema";
-import { z, ZodError } from "zod";
+import { z } from "zod";
 import { isPostgresError } from "../guards/databseError.js";
 
 const roles = new Hono<AppEnv>({
@@ -49,25 +49,14 @@ roles.post(
   "/",
   sessionMiddleware,
   requirePermission("create_roles"),
-  validator("json", (value, context) => {
-    try {
-      return roleInsertSchema.parse(value);
-    } catch (error) {
-      if (error instanceof ZodError) {
-        return context.json(
-          {
-            errorMessage: "Bad payload",
-            error: error.issues,
-          },
-          400,
-        );
-      }
-
+  zValidator("json", roleInsertSchema, (result, context) => {
+    if (!result.success) {
       return context.json(
         {
-          errorMessage: "Internal Server Error",
+          errorMessage: "Bad payload",
+          error: result.error.issues,
         },
-        500,
+        400,
       );
     }
   }),
@@ -117,48 +106,26 @@ roles.put(
   sessionMiddleware,
   requirePermission("edit_roles"),
 
-  validator("param", (value, context) => {
-    try {
-      return roleParamsSchema.parse(value);
-    } catch (error) {
-      if (error instanceof ZodError) {
-        return context.json(
-          {
-            errorMessage: "Bad payload",
-            error: error.issues,
-          },
-          400,
-        );
-      }
-
+  zValidator("param", roleParamsSchema, (result, context) => {
+    if (!result.success) {
       return context.json(
         {
-          errorMessage: "Internal Server Error",
+          errorMessage: "Bad payload",
+          error: result.error.issues,
         },
-        500,
+        400,
       );
     }
   }),
 
-  validator("json", (value, context) => {
-    try {
-      return roleUpdateSchema.parse(value);
-    } catch (error) {
-      if (error instanceof ZodError) {
-        return context.json(
-          {
-            errorMessage: "Bad payload",
-            error: error.issues,
-          },
-          400,
-        );
-      }
-
+  zValidator("json", roleUpdateSchema, (result, context) => {
+    if (!result.success) {
       return context.json(
         {
-          errorMessage: "Internal Server Error",
+          errorMessage: "Bad payload",
+          error: result.error.issues,
         },
-        500,
+        400,
       );
     }
   }),
@@ -188,25 +155,14 @@ roles.delete(
   "/:id",
   sessionMiddleware,
   requirePermission("delete_roles"),
-  validator("param", (value, context) => {
-    try {
-      return roleParamsSchema.parse(value);
-    } catch (error) {
-      if (error instanceof ZodError) {
-        return context.json(
-          {
-            errorMessage: "Bad payload",
-            error: error.issues,
-          },
-          400,
-        );
-      }
-
+  zValidator("param", roleParamsSchema, (result, context) => {
+    if (!result.success) {
       return context.json(
         {
-          errorMessage: "Internal Server Error",
+          errorMessage: "Bad payload",
+          error: result.error.issues,
         },
-        500,
+        400,
       );
     }
   }),
