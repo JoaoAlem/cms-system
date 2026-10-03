@@ -9,7 +9,7 @@ export const requirePermission = (requiredPermissions: string | string[]) =>
 
     if (!session) {
       throw new HTTPException(401, {
-        message: "Você precisa fazer login",
+        message: "You must be logged in",
       });
     }
 
@@ -20,7 +20,7 @@ export const requirePermission = (requiredPermissions: string | string[]) =>
 
     if (!hasPermission) {
       throw new HTTPException(403, {
-        message: "Você não tem permissão para acessar este recurso",
+        message: "You do not have permission to access this resource",
       });
     }
 

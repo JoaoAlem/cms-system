@@ -190,12 +190,12 @@ importers:
       dotenv:
         specifier: ^18.0.0
         version: 18.0.1
-      drizzle-zod:
-        specifier: ^0.8.3
-        version: 0.8.3(drizzle-orm@1.0.0-rc.5-ab785fc(@types/pg@8.23.1)(pg@8.23.0)(zod@4.6.5))(zod@4.6.5)
       hono:
         specifier: ^4.13.8
         version: 4.13.8
+      zod:
+        specifier: ^4.6.5
+        version: 4.6.5
     devDependencies:
       '@types/node':
         specifier: ^26.1.1
@@ -1065,12 +1065,6 @@ packages:
     peerDependencies:
       drizzle-orm: '>=1.0.0-beta.2'
 
-  drizzle-zod@0.8.3:
-    resolution: {integrity: sha512-66yVOuvGhKJnTdiqj1/Xaaz9/qzOdRJADpDa68enqS6g3t0kpNkwNYjUuaeXgZfO/UWuIM9HIhSlJ6C5ZraMww==}
-    peerDependencies:
-      drizzle-orm: '>=0.36.0'
-      zod: ^3.25.0 || ^4.0.0
-
   esbuild@0.25.12:
     resolution: {integrity: sha512-bbPBYYrtZbkt6Os6FiTLCTFxvq4tt3JKall1vRwshA3fdVztsLAatFaZobhkBC8/BrPetoa0oksYoKXoG4ryJg==}
     engines: {node: '>=18'}
@@ -1629,11 +1623,6 @@ snapshots:
     dependencies:
       drizzle-orm: 1.0.0-rc.5-ab785fc(@types/pg@8.23.1)(pg@8.23.0)(zod@4.6.5)
       pure-rand: 6.1.0
-
-  drizzle-zod@0.8.3(drizzle-orm@1.0.0-rc.5-ab785fc(@types/pg@8.23.1)(pg@8.23.0)(zod@4.6.5))(zod@4.6.5):
-    dependencies:
-      drizzle-orm: 1.0.0-rc.5-ab785fc(@types/pg@8.23.1)(pg@8.23.0)(zod@4.6.5)
-      zod: 4.6.5
 
   esbuild@0.25.12:
     optionalDependencies:

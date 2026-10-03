@@ -18,5 +18,12 @@ export {
   or,
   placeholder,
   asc,
-  desc,
+  desc
 } from "drizzle-orm";
+export {
+  createInsertSchema,
+  createSelectSchema,
+  createUpdateSchema,
+} from "drizzle-orm/zod";
+
+export * from "drizzle-orm/errors"
