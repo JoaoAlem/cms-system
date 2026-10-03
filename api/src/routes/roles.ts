@@ -4,13 +4,7 @@ import { sessionMiddleware } from "../middleware/session-middleware.js";
 import { requirePermission } from "../middleware/permission-middleware.js";
 
 import type { AppEnv } from "../types/env.js";
-import db, {
-  and,
-  createInsertSchema,
-  DrizzleQueryError,
-  eq,
-  isNull,
-} from "db";
+import db, { and, createInsertSchema, DrizzleQueryError, eq, isNull } from "db";
 import { roles as rolesTable } from "db/schema";
 import { z, ZodError } from "zod";
 import { isPostgresError } from "../guards/databseError.js";
@@ -109,11 +103,87 @@ roles.post(
   },
 );
 
-roles.put("/:id", sessionMiddleware, requirePermission("edit_roles"));
-
 const roleParamsSchema = z.object({
   id: z.coerce.number().int().positive(),
 });
+
+const roleUpdateSchema = roleInsertSchema.pick({
+  name: true,
+  title: true,
+});
+
+roles.put(
+  "/:id",
+  sessionMiddleware,
+  requirePermission("edit_roles"),
+
+  validator("param", (value, context) => {
+    try {
+      return roleParamsSchema.parse(value);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return context.json(
+          {
+            errorMessage: "Bad payload",
+            error: error.issues,
+          },
+          400,
+        );
+      }
+
+      return context.json(
+        {
+          errorMessage: "Internal Server Error",
+        },
+        500,
+      );
+    }
+  }),
+
+  validator("json", (value, context) => {
+    try {
+      return roleUpdateSchema.parse(value);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return context.json(
+          {
+            errorMessage: "Bad payload",
+            error: error.issues,
+          },
+          400,
+        );
+      }
+
+      return context.json(
+        {
+          errorMessage: "Internal Server Error",
+        },
+        500,
+      );
+    }
+  }),
+  async (context) => {
+    const { id } = context.req.valid("param");
+    const { title, name } = context.req.valid("json");
+
+    const [updatedRole] = await db
+      .update(rolesTable)
+      .set({
+        name: name,
+        title: title,
+        updatedAt: new Date(),
+      })
+      .where(and(eq(rolesTable.id, id), isNull(rolesTable.deletedAt)))
+      .returning();
+
+    if (!updatedRole) {
+      return context.json({ errorMessage: "Role not found" }, 404);
+    }
+
+    return context.body(null, 204);
+  },
+);
+
 roles.delete(
   "/:id",
   sessionMiddleware,
