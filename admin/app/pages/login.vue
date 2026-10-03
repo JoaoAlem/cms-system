@@ -9,3 +9,7 @@ definePageMeta({
   layout: 'login',
 })
 </script>
+
+<template>
+    <div></div>
+</template>
