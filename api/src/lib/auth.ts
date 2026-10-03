@@ -1,8 +1,10 @@
 import { betterAuth } from "better-auth";
+import { createAuthMiddleware, APIError } from "better-auth/api";
 import { drizzleAdapter } from "@better-auth/drizzle-adapter/relations-v2";
-import { openAPI } from "better-auth/plugins";
 import db from "db";
 import argon2 from "argon2"
+
+const ALLOWED_PATHS = new Set(["/sign-in/email"]);
 
 export const auth = betterAuth({
   basePath: "/v1/auth",
@@ -23,7 +25,13 @@ export const auth = betterAuth({
 			}
 		}
   },
-  plugins: [openAPI()],
+  hooks: {
+    before: createAuthMiddleware(async (ctx) => {
+      if (ctx.request && !ALLOWED_PATHS.has(ctx.path)) {
+        throw new APIError("NOT_FOUND");
+      }
+    }),
+  },
 });
 
 export type AuthType = {
