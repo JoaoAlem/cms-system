@@ -6,7 +6,7 @@ import { HTTPException } from "hono/http-exception";
 
 const me = new Hono<AppEnv>({
   strict: false,
-}).basePath("user");
+}).basePath("me");
 
 me.get("/permissions", sessionMiddleware, async (context) => {
   const authSession = context.get("session")!;
