@@ -1,6 +1,7 @@
 packages:
   - "db"
   - "api"
+  - "admin"
 allowBuilds:
   argon2: true
   esbuild: true
