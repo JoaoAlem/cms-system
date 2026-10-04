@@ -4,7 +4,7 @@ import { drizzleAdapter } from "@better-auth/drizzle-adapter/relations-v2";
 import db from "db";
 import argon2 from "argon2"
 
-const ALLOWED_PATHS = new Set(["/sign-in/email"]);
+const ALLOWED_PATHS = new Set(["/sign-in/email", "/get-session"]);
 
 export const auth = betterAuth({
   basePath: "/v1/auth",
